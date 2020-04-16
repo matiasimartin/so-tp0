@@ -11,9 +11,9 @@ int main(void)
 {
 	/*---------------------------------------------------PARTE 2-------------------------------------------------------------*/
 	int conexion;
-	//char* ip;
-	//char* puerto;
-	// Lo comento porque tira warning porque no se usa
+	char* ip;
+	char* puerto;
+
 
 	t_log* logger;
 	t_config* config;
@@ -39,10 +39,11 @@ int main(void)
 
 	//crear conexion
 
-	//crear_conexion(config_get_string_value(config, "IP"),config_get_string_value(config, "PUERTO")); Esto si lo hago asi no crea la conexion, no se que onda.
 
+	ip = config_get_string_value(config, "IP");
+	puerto = config_get_string_value(config, "PUERTO");
 
-	conexion = crear_conexion("127.0.0.1", "4444");
+	conexion = crear_conexion(ip, puerto);
 
 	printf( "\nSe creo la conexion con el valor %d \n", conexion);
 
@@ -66,10 +67,10 @@ int main(void)
 
 	mensajeRecibido=recibir_mensaje(conexion);
 
-	printf("\nSe recibio el mensaje: %s", mensajeRecibido);
+
 	//loguear mensaje recibido
 
-	log_info(logger, mensajeRecibido);
+	log_info(logger, "Se recibio el mensaje: %s " ,mensajeRecibido);
 
 	terminar_programa(conexion, logger, config);
 }
